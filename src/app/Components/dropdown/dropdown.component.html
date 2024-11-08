@@ -1,0 +1,21 @@
+<div
+class="absolute bg-white rounded-lg shadow-lg start-0 top-full mt-2 w-48 p-4 transition-all duration-200 ease-in-out"
+
+>
+<p
+  class="w-full text-nowrap font-semibold text-gray-800 text-lg mb-2"
+>
+  {{ userData?.displayName }}
+</p>
+<button
+  class="bg-gray-300 w-full rounded-md p-2 hover:bg-gray-800 hover:text-white transition duration-200"
+>
+  Profile <i class="pi pi-user ms-2"></i>
+</button>
+<button
+  class="bg-gray-300 w-full rounded-md p-2 hover:bg-gray-800 hover:text-white transition duration-200 mt-2"
+  (click)="logOut()"
+>
+  Log out <i class="pi pi-arrow-right ms-2"></i>
+</button>
+</div>

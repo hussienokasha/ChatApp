@@ -1,0 +1,89 @@
+<div class="h-screen w-full">
+  <div class="flex h-full w-full">
+    <div
+      class="w-full shadow-md max-w-fit bg-slate-800 overflow-y-auto scroll-container resize-x"
+    >
+      <div
+        class="sticky top-0 z-10 p-4 bg-slate-800 w-full flex gap-3 align-center"
+      >
+        <div
+          class="flex-shrink-0 rounded-full w-10 h-10 cursor-pointer relative group"
+          (click)="show = !show"
+        >
+          <img
+            src="assets/Logo.png"
+            alt="User Avatar"
+            class="w-full h-full object-cover rounded-full"
+          />
+          @if(show){
+          <app-dropdown #dropdown></app-dropdown>
+
+          }
+        </div>
+        <div class="relative w-full">
+          <input
+            type="text"
+            class="w-full rounded-full bg-slate-700 border-0 outline-none py-1 px-2 text-white placeholder:text-white font-thin"
+            placeholder="Search"
+            [formControl]="searchValue"
+          />
+          @if(searchValue.value){
+          <div class="absolute bg-white rounded-md p-2 w-full mt-2">
+            @for(user of users;track user){
+              @if(user.uid != currentUser.uid){
+                <div class="border-b cursor-pointer" (click)="createNewChat(user)">
+                  <p>{{user.displayName}}</p>
+                  <p class="text-sm font-light">{{user.email}}</p>
+                </div>
+              }
+            }
+          </div>
+          }
+        </div>
+      </div>
+      <div>
+        @if(chats.length >0){ @for (chat of chats; track chat.chatId) {
+        <div
+          [routerLink]="['chat',chat.chatId]"
+          routerLinkActive="bg-slate-700"
+          class="flex items-stretch gap-2 px-3 py-2 text-white hover:bg-slate-700 mx-2 rounded-lg cursor-pointer"
+        >
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gray-500">
+            <img
+              src="https://t3.ftcdn.net/jpg/02/00/90/24/360_F_200902415_G4eZ9Ok3Ypd4SZZKjc8nqJyFVp1eOD6V.jpg"
+              alt="User Avatar"
+              class="w-full h-full object-cover rounded-full"
+            />
+          </div>
+          <div>
+            <div class="text-sm font-medium">
+              {{
+                chat.users[0].displayName == currentUser.displayName
+                  ? chat.users[1].displayName
+                  : chat.users[0].displayName
+              }}
+            </div>
+            <div
+              class="text-sm font-thin text-gray-200 overflow-clip truncate max-w-60"
+            >
+              {{ chat.lastMessage }}
+            </div>
+          </div>
+          <p class="font-thin text-sm flex ms-auto">
+            {{ chat.timestamp | customDate }}
+          </p>
+        </div>
+        } }@else {
+        <div class="text-white text-center mt-8">
+          <h1 class="text-2xl">No Chats Yet</h1>
+          <p class="px-3">Search for new user by name</p>
+        </div>
+        }
+      </div>
+    </div>
+
+    <div class="w-full">
+      <router-outlet />
+    </div>
+  </div>
+</div>

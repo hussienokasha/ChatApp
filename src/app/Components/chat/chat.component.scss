@@ -1,0 +1,23 @@
+/* Hide scrollbar arrows and style the scrollbar */
+.scroll-container::-webkit-scrollbar {
+  width: 8px; /* Customize width as needed */
+}
+
+.scroll-container::-webkit-scrollbar-button {
+  display: none; /* Hide the top and bottom arrows */
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: #2d3748; /* Dark track background */
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background: #4a5568; /* Light thumb color */
+  border-radius: 4px;
+}
+
+/* Firefox custom scrollbar without arrows */
+.scroll-container {
+  scrollbar-width: thin;
+  scrollbar-color: #4a5568 #2d3748;
+}

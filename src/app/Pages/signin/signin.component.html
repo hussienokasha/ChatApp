@@ -1,0 +1,64 @@
+<div class="w-full h-screen bg-gradient-to-b from-white to-slate-900 p-4">
+  <div class="rounded-md py-3 px-20 bg-gray-700 w-fit m-auto">
+    <img
+      src="assets/Logo.png"
+      alt="Spotify_logo_without_text"
+      class="w-20 flex m-auto"
+    />
+    <p class="text-4xl font-medium text-white text-center">
+      Log in to Chat App
+    </p>
+
+    <hr class="my-6" />
+
+    <form [formGroup]="loginForm"  (ngSubmit)="login()">
+      <div class="text-white">
+        <label for="" class="block">Email or username</label>
+        <input
+          type="text"
+          class="rounded-md p-2 border-2 border-slate-300 bg-transparent w-full focus:border-none"
+          placeholder="name@domain.com"
+          formControlName="email"
+        />
+        <label for="" class="block mt-3">Password</label>
+        <div class="relative">
+          <input
+            [type]="isHidden ? 'password' : 'text'"
+            class="rounded-md p-2 border-2 border-slate-300 bg-transparent w-full focus:border-none"
+            placeholder="Password"
+            formControlName="password"
+          />
+          <button
+            class="absolute end-2 top-3 w-20 h-20"
+            (click)="isHidden = !isHidden"
+            type="button"
+          >
+            <i
+              [ngClass]="{
+                'pi pi-eye text-green-700': isHidden,
+                'pi pi-eye-dash text-green-700': !isHidden
+              }"
+            ></i>
+          </button>
+        </div>
+        <button
+          class="rounded-full bg-green-500 hover:bg-green-600 w-full p-3 my-3 disabled:bg-gray-400"
+          type="submit"
+          [disabled]="loginForm.invalid"
+        >
+          Log in
+        </button>
+      </div>
+    </form>
+    <a
+      class="text-white underline block hover:text-green-500"
+      routerLink="/password-reset"
+      >Forget your password?</a
+    >
+    <p class="text-white">
+      Don't have an acount?<a routerLink="/signup" class="hover:text-green-500">
+        Sign up</a
+      >
+    </p>
+  </div>
+</div>

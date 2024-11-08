@@ -1,0 +1,68 @@
+<div class="w-full bg-slate-700 h-full">
+  <div class="flex flex-col justify-between h-full">
+    <div class="w-full bg-slate-800 p-2 flex">
+      <div class="me-auto text-white flex gap-3">
+        <div class="w-12 h-12 rounded-full overflow-hidden">
+          <img
+            src="https://t3.ftcdn.net/jpg/02/00/90/24/360_F_200902415_G4eZ9Ok3Ypd4SZZKjc8nqJyFVp1eOD6V.jpg"
+            alt=""
+            class="w-full h-full object-cover"
+          />
+        </div>
+
+        <div>
+          <p class="-mb-1 text-lg">{{userData.displayName! == receiverData.users[1].displayName?receiverData.users[0].displayName: receiverData.users[1].displayName!}}</p>
+          <span class="font-thin text-sm text-gray-400">{{userData.status}}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Adjusted this div to ensure proper height management -->
+    <div class="flex-grow ">
+      <div
+        class="overflow-y-auto max-h-[calc(100vh-9rem)] scroll-container rounded-md"
+        #messagesContainer
+      >
+        <!-- Change the max height to fit within the viewport -->
+        @for(mess of messages;track mess.messageId){
+           @if(userData.uid == mess.senderId){
+        <div
+          class="text-white m-3 bg-blue-600 flex ms-auto py-1 px-2 rounded-md w-fit cursor-pointer group"
+        >
+          {{ mess.text }}
+
+          <div class="hidden group-hover:block relative">
+            <i class="pi pi-angle-down mt-1 ms-2 " (click)="showDelete = !showDelete"></i>
+            @if(showDelete){
+              <button class="absolute end-0 top-6 text-sm p-1 bg-gray-900 rounded-md" (click)="deleteMessage(mess.messageId)">Delete</button>
+            }
+          </div>
+        </div>
+        }@else {
+        <div
+          class="text-white m-3 bg-slate-900 flex me-auto py-1 px-2 rounded-md w-fit"
+        >
+          {{ mess.text }}
+        </div>
+        } }
+      </div>
+    </div>
+
+    <div class="p-4 flex align-center gap-2">
+      <input
+        type="text"
+        class="w-full p-2 bg-slate-800 text-white rounded focus:outline-none"
+        placeholder="Type a message..."
+        [formControl]="message"
+        (keydown.enter)="sendMessage()"
+      />
+      <button
+        class="flex-shrink rounded-full bg-blue-700 p-2 w-11 h-11 disabled:bg-slate-500"
+        (click)="sendMessage()"
+        [disabled]="message.invalid"
+      >
+        <i class="pi pi-send text-white text-xl"></i>
+      </button>
+    </div>
+  </div>
+</div>

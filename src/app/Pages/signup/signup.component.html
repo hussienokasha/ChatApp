@@ -1,0 +1,45 @@
+<div class="h-screen w-full p-6">
+  <h1 class="text-6xl font-bold p-3 text-center">Sign up to start Chating</h1>
+  <div class="text-center w-fit m-auto">
+    <img src="assets/Logo.png" alt="" class="w-20 flex m-auto" />
+    <div class="text-start m-auto mt-4">
+      <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+        <label class="block text-start">Display Name</label>
+        <input
+          type="text"
+          class="rounded-md p-2 border-2 border-slate-300 w-full"
+          placeholder="Hussein Okasha"
+          formControlName="displayName"
+        />
+        <label class="block text-start">Email adress</label>
+        <input
+          type="text"
+          class="rounded-md p-2 border-2 border-slate-300 w-full"
+          placeholder="name@domain.com"
+          formControlName="email"
+        />
+        <label class="block text-start mt-3">Password</label>
+        <input
+          type="password"
+          class="rounded-md p-2 border-2 border-slate-300 w-full"
+          placeholder="name@domain.com"
+          formControlName="password"
+        />
+
+        <button
+          class="rounded-full bg-green-500 hover:bg-green-600 w-full p-3 my-3"
+          type="submit"
+        >
+          Sign up
+        </button>
+      </form>
+    </div>
+
+    <div class="w-full h-10 border-b"></div>
+    <p class="py-2">
+      Already have an account?
+      <a routerLink="/signin" class="text-green-600">Log in here</a>
+    </p>
+  </div>
+</div>
+
